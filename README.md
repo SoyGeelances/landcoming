@@ -16,6 +16,13 @@ npm run dev
 
 Open the local URL printed in your terminal (usually `http://localhost:5173`).
 
+## Web3Forms
+
+The lead forms submit to Web3Forms. Copy `.env.example` to `.env`, set
+`VITE_WEB3FORMS_ACCESS_KEY` to the access key from the Web3Forms dashboard, and
+restart the dev server. Add the same variable to the environment variables for
+the production deployment; do not commit `.env`.
+
 Other commands:
 
 ```sh
@@ -51,16 +58,13 @@ npm run format    # Prettier
 - `src/components/site/` — reusable Header, Footer, PropertyCard, LeadForm, Reveal and
   page layout primitives.
 
-Images for the listings load from the original landcoming.com URLs. The logo files
-(`src/assets/logo-landcoming-colors.webp` and `logo-landcoming-negative.webp`) and the
-editorial photography are bundled locally, so the site works offline apart from those
-listing photos.
+Images for the listings load from the original landcoming.com URLs. The logo files and
+editorial photography are served locally from `public/images`, so the site works offline
+apart from those listing photos.
 
 ## Notes
 
-- The lead and enquiry forms build a pre-filled `mailto:` message — no backend is required
-  to run the site. Wire them to a form service or a server function if you want submissions
-  stored in a database.
+- The lead and enquiry forms submit to Web3Forms — no backend is required to run the site.
 - Listing facts (acreage, price, MLS) are reproduced as published; Bishop Drive carries the
   same acreage discrepancy the source listing does (50.8 acres in the description, 45 acres
   in the property record).

@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, FileSearch, Handshake, Map, ShieldCheck } from "lucide-react";
-import heroImg from "@/assets/hero-land.jpg";
-import buyImg from "@/assets/buy-land.jpg";
-import sellImg from "@/assets/sell-land.jpg";
+const heroImg = "/images/hero-land.jpg";
+const buyImg = "/images/buy-land.jpg";
+const sellImg = "/images/sell-land.jpg";
 import { PageShell, CtaBand } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { PropertyCard } from "@/components/site/PropertyCard";

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import buyImg from "@/assets/buy-land.jpg";
+const buyImg = "/images/buy-land.jpg";
 import { PageShell, PageHero, CtaBand } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { LeadForm } from "@/components/site/LeadForm";

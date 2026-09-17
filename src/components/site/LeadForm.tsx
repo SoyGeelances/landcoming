@@ -20,16 +20,39 @@ export function LeadForm({
   subject: string;
   note?: string;
 }) {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const body = fields
-      .map((f) => `${f.label}: ${String(data.get(f.name) ?? "").trim()}`)
-      .join("\n");
-    setSent(true);
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("sending");
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const emailField = fields.find((field) => field.type === "email");
+    data.set("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "");
+    data.set("subject", subject);
+    data.set("from_name", "LANDCOMING website");
+    data.set("page_url", window.location.href);
+    if (emailField) {
+      data.set("replyto", String(data.get(emailField.name) ?? "").trim());
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+      });
+      const result = (await response.json()) as { success?: boolean };
+
+      if (!response.ok || !result.success) {
+        throw new Error("Web3Forms submission failed");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -62,17 +85,22 @@ export function LeadForm({
         </div>
       ))}
 
+      <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
       <div className="sm:col-span-2">
         <button
           type="submit"
+          disabled={status === "sending"}
           className="w-full bg-forest px-8 py-4 eyebrow text-primary-foreground transition-colors hover:bg-forest-deep sm:w-auto"
         >
-          {submitLabel}
+          {status === "sending" ? "Sending..." : submitLabel}
         </button>
         <p className="mt-4 text-sm text-muted-foreground" role="status">
-          {sent
-            ? `Your email client should open with the details. If it does not, write to ${site.email} or call ${site.phone}.`
-            : (note ?? `Submitting opens your email client with the details addressed to ${site.email}.`)}
+          {status === "success"
+            ? `Thanks. Your message was sent. We will be in touch soon, or call ${site.phone}.`
+            : status === "error"
+              ? `We could not send your message. Please write to ${site.email} or call ${site.phone}.`
+              : (note ?? "Your details are sent securely to the LANDCOMING team.")}
         </p>
       </div>
     </form>

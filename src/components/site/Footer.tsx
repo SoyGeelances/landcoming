@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { nav, site } from "@/data/site";
-import logoUrl from "@/assets/logo-landcoming-negative.webp";
+const logoUrl = "/images/logo-landcoming-negative.webp";
 
 export function Footer() {
   return (

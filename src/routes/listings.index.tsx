@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import aboutImg from "@/assets/about-land.jpg";
+const aboutImg = "/images/about-land.jpg";
 import { PageShell, PageHero, CtaBand } from "@/components/site/Layout";
 import { PropertyCard } from "@/components/site/PropertyCard";
 import { Reveal } from "@/components/site/Reveal";

@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { nav, site } from "@/data/site";
-import logoUrl from "@/assets/logo-landcoming-colors.webp";
+const logoUrl = "/images/logo-landcoming-colors.webp";
 
 export function Header() {
   const [open, setOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
-import sellImg from "@/assets/sell-land.jpg";
+const sellImg = "/images/sell-land.jpg";
 import { PageShell, PageHero } from "@/components/site/Layout";
 import { LeadForm } from "@/components/site/LeadForm";
 import { site } from "@/data/site";
@@ -57,8 +57,9 @@ function Contact() {
                 <address className="not-italic text-charcoal">{site.address}</address>
               </li>
             </ul>
+          </div>
 
-            <div className="mt-10 overflow-hidden border border-border">
+          <div className="mt-10 overflow-hidden border border-border">
               <iframe
                 title="LANDCOMING office location map"
                 loading="lazy"
@@ -66,24 +67,6 @@ function Contact() {
                 referrerPolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps?q=1211+Center+Court+Dr+%23200,+Covina,+CA+91724&output=embed"
               />
-            </div>
-          </div>
-
-          <div className="border border-border bg-card p-6 md:p-10">
-            <h2 className="text-2xl text-forest-deep">Send a message</h2>
-            <div className="mt-6">
-              <LeadForm
-                subject="Website enquiry — LANDCOMING"
-                submitLabel="Send message"
-                fields={[
-                  { name: "name", label: "Name", required: true },
-                  { name: "email", label: "Email", type: "email", required: true },
-                  { name: "phone", label: "Phone", type: "tel" },
-                  { name: "subject", label: "Property or topic" },
-                  { name: "message", label: "Message", type: "textarea", required: true },
-                ]}
-              />
-            </div>
           </div>
         </div>
       </section>
