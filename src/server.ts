@@ -58,4 +58,7 @@ export default {
       });
     }
   },
+  async close() {
+    // No-op: required by Nitro's prerenderer lifecycle for GitHub Pages builds.
+  },
 };
