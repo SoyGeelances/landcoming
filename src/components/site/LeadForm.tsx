@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { site } from "@/data/site";
 
 type Field = {
@@ -8,6 +8,9 @@ type Field = {
   required?: boolean;
   placeholder?: string;
 };
+
+const WEB3FORMS_SCRIPT_URL = "https://web3forms.com/client/script.js";
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "be0fcbb0-d3ae-4ab2-8ebb-0a60a1935d97";
 
 export function LeadForm({
   fields,
@@ -22,14 +25,34 @@ export function LeadForm({
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
+  useEffect(() => {
+    const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${WEB3FORMS_SCRIPT_URL}"]`);
+
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.src = WEB3FORMS_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
 
     const form = e.currentTarget;
+    const captchaField = form.querySelector<HTMLTextAreaElement>('textarea[name="h-captcha-response"]');
+
+    if (!captchaField || !captchaField.value.trim()) {
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+
     const data = new FormData(form);
     const emailField = fields.find((field) => field.type === "email");
-    data.set("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "");
+    data.set("access_key", WEB3FORMS_ACCESS_KEY);
     data.set("subject", subject);
     data.set("from_name", "LANDCOMING website");
     data.set("page_url", window.location.href);
@@ -88,6 +111,10 @@ export function LeadForm({
       <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
 
       <div className="sm:col-span-2">
+        <div className="h-captcha" data-captcha="true" data-theme="light" aria-label="Security check" />
+      </div>
+
+      <div className="sm:col-span-2">
         <button
           type="submit"
           disabled={status === "sending"}
@@ -99,7 +126,7 @@ export function LeadForm({
           {status === "success"
             ? `Thanks. Your message was sent. We will be in touch soon, or call ${site.phone}.`
             : status === "error"
-              ? `We could not send your message. Please write to ${site.email} or call ${site.phone}.`
+              ? `Please complete the captcha and try again. If the issue continues, write to ${site.email} or call ${site.phone}.`
               : (note ?? "Your details are sent securely to the LANDCOMING team.")}
         </p>
       </div>

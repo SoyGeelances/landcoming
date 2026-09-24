@@ -12,7 +12,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Reach LANDCOMING at +1 626-430-9966 or info@landcoming.com, or visit 1211 Center Court Dr #200, Covina, CA 91724.",
+          "Reach LANDCOMING at +1 626-430-9966 or tonyzeng626@gmail.com, or visit 1211 Center Court Dr #200, Covina, CA 91724.",
       },
       { property: "og:title", content: "Contact LANDCOMING" },
       { property: "og:description", content: "Phone, email and office address for LANDCOMING in Covina, California." },

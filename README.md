@@ -20,8 +20,10 @@ Open the local URL printed in your terminal (usually `http://localhost:5173`).
 
 The lead forms submit to Web3Forms. Copy `.env.example` to `.env`, set
 `VITE_WEB3FORMS_ACCESS_KEY` to the access key from the Web3Forms dashboard, and
-restart the dev server. Add the same variable to the environment variables for
-the production deployment; do not commit `.env`.
+restart the dev server. In the Web3Forms dashboard, set the form recipient to
+`geeelancessoporte@gmail.com` and enable hCaptcha to block spam. Add the same
+variable to the environment variables for the production deployment; do not
+commit `.env`.
 
 Other commands:
 

@@ -51,7 +51,7 @@ export const properties: Property[] = [
       "Unimproved vacant land",
     ],
     images: [`${U}/0-Bishop-Dr-1.png`, `${U}/0-Bishop-Dr-2.png`, `${U}/0-Bishop-Dr-3.png`],
-    featured: true,
+    featured: false,
   },
   {
     slug: "0-w-ave-f",
@@ -76,7 +76,7 @@ export const properties: Property[] = [
       "Unimproved vacant land",
     ],
     images: [`${U}/0-W-Ave-F-1.png`, `${U}/0-W-Ave-F-2.png`, `${U}/0-W-Ave-F-3-1.png`],
-    featured: true,
+    featured: false,
   },
   {
     slug: "0-osborne-rd",
@@ -126,7 +126,7 @@ export const properties: Property[] = [
       `${U}/Mojave-Barstow-Hwy-2.png`,
       `${U}/Mojave-Barstow-Hwy-3.png`,
     ],
-    featured: false,
+    featured: true,
   },
   {
     slug: "o-mojave-dr",
@@ -210,7 +210,7 @@ export const properties: Property[] = [
       COMMON_USE_NOTE,
     highlights: ["Highway 14 exposure", "Adjacent to Ancient Valley Airpark", "MLS CV23042130"],
     images: [`${U}/0-sopp-rd-1.jpg`, `${U}/0-sopp-rd-2.jpg`, `${U}/0-sopp-rd-3.jpg`],
-    featured: true,
+    featured: false,
   },
   {
     slug: "sand-turtle-dr",
@@ -235,7 +235,7 @@ export const properties: Property[] = [
       `${U}/Sand-Turtle-Dr-City-of-Mojave-Kern-County-CA-2.png`,
       `${U}/Sand-Turtle-Dr-City-of-Mojave-Kern-County-CA-3.png`,
     ],
-    featured: false,
+    featured: true,
   },
   {
     slug: "0-us-hwy395",
